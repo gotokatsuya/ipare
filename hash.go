@@ -25,10 +25,10 @@ func (h *Hash) Do(src image.Image) uint64 {
 }
 
 func (h *Hash) Compare(src1, src2 image.Image) int {
-	return hammingDistance(h.Algorithm.Hash(src1), h.Algorithm.Hash(src2))
+	return HammingDistance(h.Algorithm.Hash(src1), h.Algorithm.Hash(src2))
 }
 
-func hammingDistance(hash1, hash2 uint64) int {
+func HammingDistance(hash1, hash2 uint64) int {
 	var dist int
 	for v := hash1 ^ hash2; v != 0; v &= v - 1 {
 		dist++
