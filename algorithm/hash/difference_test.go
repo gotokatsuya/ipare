@@ -8,7 +8,7 @@ import (
 
 func TestDifference(t *testing.T) {
 	difference := NewDifference()
-	img, err := util.DecodeImageByPath("../../testdata/sample1.jpg")
+	img, err := util.Open("../../testdata/sample1.jpg")
 	if err != nil {
 		t.Fatal(err)
 	}

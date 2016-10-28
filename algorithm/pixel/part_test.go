@@ -8,14 +8,14 @@ import (
 
 func TestPart(t *testing.T) {
 	part := NewPart()
-	img1, err := util.DecodeImageByPath("../../testdata/sample1.jpg")
+	img1, err := util.Open("../../testdata/sample1.jpg")
 	if err != nil {
 		t.Fatal(err)
 	}
 	if img1 == nil {
 		t.Fatal("img1 == nil.")
 	}
-	img2, err := util.DecodeImageByPath("../../testdata/sample2.jpg")
+	img2, err := util.Open("../../testdata/sample2.jpg")
 	if err != nil {
 		t.Fatal(err)
 	}

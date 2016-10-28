@@ -28,9 +28,9 @@ func TestSameHash(t *testing.T) {
 		hash := NewHash()
 		hash.Algorithm = tt.algorithm
 
-		img1, err := util.DecodeImageByPath(tt.img1)
+		img1, err := util.Open(tt.img1)
 		assert.NoError(err, target)
-		img2, err := util.DecodeImageByPath(tt.img2)
+		img2, err := util.Open(tt.img2)
 		assert.NoError(err, target)
 
 		distance := hash.Compare(img1, img2)
@@ -57,9 +57,9 @@ func TestUnSameHash(t *testing.T) {
 		hash := NewHash()
 		hash.Algorithm = tt.algorithm
 
-		img1, err := util.DecodeImageByPath(tt.img1)
+		img1, err := util.Open(tt.img1)
 		assert.NoError(err, target)
-		img2, err := util.DecodeImageByPath(tt.img2)
+		img2, err := util.Open(tt.img2)
 		assert.NoError(err, target)
 
 		distance := hash.Compare(img1, img2)
@@ -86,9 +86,9 @@ func TestSimilarHash(t *testing.T) {
 		hash := NewHash()
 		hash.Algorithm = tt.algorithm
 
-		img1, err := util.DecodeImageByPath(tt.img1)
+		img1, err := util.Open(tt.img1)
 		assert.NoError(err, target)
-		img2, err := util.DecodeImageByPath(tt.img2)
+		img2, err := util.Open(tt.img2)
 		assert.NoError(err, target)
 
 		distance := hash.Compare(img1, img2)

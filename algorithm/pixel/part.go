@@ -12,14 +12,15 @@ type Part struct {
 	PartHeightSize int
 }
 
+const (
+	defaultPartSize = 8
+)
+
 func NewPart() *Part {
-	const (
-		partSize = 8
-	)
 	p := &Part{
 		PartBeginPoint: image.Point{X: 0, Y: 0},
 	}
-	return p.WithPartSquare(partSize)
+	return p.WithPartSquare(defaultPartSize)
 }
 
 func (p *Part) WithBeginPoint(x, y int) *Part {
@@ -39,19 +40,9 @@ func (p *Part) partEndPoint() (int, int) {
 
 func (p *Part) adjustPoint(src image.Image) {
 	partEndPointX, partEndPointY := p.partEndPoint()
-
 	srcBounds := src.Bounds()
-
-	maxX := srcBounds.Max.X
-	if partEndPointX > maxX {
-		p.PartBeginPoint.X = 0
-		p.PartWidthSize = maxX
-	}
-
-	maxY := srcBounds.Max.Y
-	if partEndPointY > maxY {
-		p.PartBeginPoint.Y = 0
-		p.PartWidthSize = maxX
+	if partEndPointX > srcBounds.Max.X || partEndPointY > srcBounds.Max.Y {
+		p.WithBeginPoint(0, 0).WithPartSquare(defaultPartSize)
 	}
 }
 

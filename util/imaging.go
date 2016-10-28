@@ -2,7 +2,7 @@ package util
 
 import (
 	"image"
-	"image/draw"
+	"io"
 
 	"github.com/disintegration/imaging"
 )
@@ -57,8 +57,13 @@ func CenterPoint(src image.Image) (int, int) {
 }
 
 func Copy(src image.Image) image.Image {
-	r := src.Bounds()
-	dst := image.NewNRGBA(r)
-	draw.Draw(dst, r, src, r.Min, draw.Src)
-	return dst
+	return imaging.Clone(src)
+}
+
+func Open(filename string) (image.Image, error) {
+	return imaging.Open(filename)
+}
+
+func Decode(r io.Reader) (image.Image, error) {
+	return imaging.Decode(r)
 }

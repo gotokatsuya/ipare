@@ -28,9 +28,9 @@ func TestSamePixel(t *testing.T) {
 		pixel := NewPixel()
 		pixel.Algorithm = tt.algorithm
 
-		img1, err := util.DecodeImageByPath(tt.img1)
+		img1, err := util.Open(tt.img1)
 		assert.NoError(err, target)
-		img2, err := util.DecodeImageByPath(tt.img2)
+		img2, err := util.Open(tt.img2)
 		assert.NoError(err, target)
 
 		distance := pixel.Compare(img1, img2)
@@ -57,9 +57,9 @@ func TestUnSamePixel(t *testing.T) {
 		pixel := NewPixel()
 		pixel.Algorithm = tt.algorithm
 
-		img1, err := util.DecodeImageByPath(tt.img1)
+		img1, err := util.Open(tt.img1)
 		assert.NoError(err, target)
-		img2, err := util.DecodeImageByPath(tt.img2)
+		img2, err := util.Open(tt.img2)
 		assert.NoError(err, target)
 
 		distance := pixel.Compare(img1, img2)
