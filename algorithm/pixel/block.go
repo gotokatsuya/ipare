@@ -33,7 +33,7 @@ func (b *Block) Compare(src1, src2 image.Image) int {
 	src1 = b.ResizeImage(src1)
 	src2 = b.ResizeImage(src2)
 
-	var sumDifferent int
+	var sumDifference int
 
 	var w sync.WaitGroup
 	var m sync.Mutex
@@ -46,10 +46,10 @@ func (b *Block) Compare(src1, src2 image.Image) int {
 			go func(src1, src2 image.Image, begin, end image.Point) {
 				defer w.Done()
 
-				different := differentInBlock(src1, src2, begin, end)
+				difference := differentInBlock(src1, src2, begin, end)
 
 				m.Lock()
-				sumDifferent += different
+				sumDifference += difference
 				m.Unlock()
 
 			}(src1, src2, begin, end)
@@ -57,12 +57,12 @@ func (b *Block) Compare(src1, src2 image.Image) int {
 	}
 	w.Wait()
 
-	return sumDifferent
+	return sumDifference
 }
 
 func differentInBlock(src1, src2 image.Image, begin, end image.Point) int {
 
-	var different int
+	var difference int
 
 	for y := begin.Y; y < end.Y; y++ {
 		for x := begin.X; x < end.X; x++ {
@@ -71,10 +71,11 @@ func differentInBlock(src1, src2 image.Image, begin, end image.Point) int {
 			pixel2 := util.GrayscaleRGBA(src2.At(y, x).RGBA())
 
 			if pixel1 != pixel2 {
-				different++
+				difference++
 			}
 
 		}
 	}
-	return different
+
+	return difference
 }

@@ -64,7 +64,7 @@ func (p *Part) Compare(src1, src2 image.Image) int {
 
 	p.preCompare(src1, src2)
 
-	var sumDifferent int
+	var sumDifference int
 
 	partEndPointX, partEndPointY := p.partEndPoint()
 
@@ -75,10 +75,10 @@ func (p *Part) Compare(src1, src2 image.Image) int {
 			pixel2 := util.GrayscaleRGBA(src2.At(y, x).RGBA())
 
 			if pixel1 != pixel2 {
-				sumDifferent++
+				sumDifference++
 			}
 
 		}
 	}
-	return sumDifferent
+	return sumDifference
 }
