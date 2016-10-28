@@ -28,12 +28,6 @@ func NewResizeOption(size ...int) ResizeOption {
 	}
 }
 
-func (r *ResizeOption) WithSquare(size int) *ResizeOption {
-	r.Width = size
-	r.Height = size
-	return r
-}
-
 func (r ResizeOption) ResizeImage(src image.Image) image.Image {
 	return imaging.Resize(
 		src,
@@ -54,4 +48,9 @@ func GrayscaleRGBA(r, g, b, a uint32) uint8 {
 
 func GrayscaleImage(src image.Image) image.Image {
 	return imaging.Grayscale(src)
+}
+
+func CenterPoint(src image.Image) (int, int) {
+	size := src.Bounds().Size()
+	return size.X / 2, size.Y / 2
 }

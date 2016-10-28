@@ -7,7 +7,7 @@ import (
 )
 
 type Part struct {
-	PartBeginPoint util.Point
+	PartBeginPoint image.Point
 	PartWidthSize  int
 	PartHeightSize int
 }
@@ -17,9 +17,14 @@ func NewPart() *Part {
 		partSize = 8
 	)
 	p := &Part{
-		PartBeginPoint: util.NewPoint(0, 0),
+		PartBeginPoint: image.Point{X: 0, Y: 0},
 	}
 	return p.WithPartSquare(partSize)
+}
+
+func (p *Part) WithBeginPoint(x, y int) *Part {
+	p.PartBeginPoint = image.Point{X: x, Y: y}
+	return p
 }
 
 func (p *Part) WithPartSquare(size int) *Part {

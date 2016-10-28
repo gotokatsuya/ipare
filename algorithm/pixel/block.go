@@ -40,11 +40,10 @@ func (b *Block) Compare(src1, src2 image.Image) int {
 
 	for y := 0; y < b.Height; y = y + b.BlockHeightSize {
 		for x := 0; x < b.Width; x = x + b.BlockWidthSize {
-			begin := util.NewPoint(x, y)
-			end := util.NewPoint(x+b.BlockWidthSize, y+b.BlockHeightSize)
-
+			begin := image.Point{X: x, Y: y}
+			end := image.Point{X: x + b.BlockWidthSize, Y: y + b.BlockHeightSize}
 			w.Add(1)
-			go func(src1, src2 image.Image, begin, end util.Point) {
+			go func(src1, src2 image.Image, begin, end image.Point) {
 				defer w.Done()
 
 				different := differentInBlock(src1, src2, begin, end)
@@ -61,7 +60,7 @@ func (b *Block) Compare(src1, src2 image.Image) int {
 	return sumDifferent
 }
 
-func differentInBlock(src1, src2 image.Image, begin, end util.Point) int {
+func differentInBlock(src1, src2 image.Image, begin, end image.Point) int {
 
 	var different int
 

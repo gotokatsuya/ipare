@@ -22,6 +22,9 @@ func TestPart(t *testing.T) {
 	if img2 == nil {
 		t.Fatal("img2 == nil.")
 	}
-	res := part.Compare(img1, img2)
+	resizeOpt := util.NewResizeOption(100)
+	img1 = resizeOpt.ResizeImage(img1)
+	img2 = resizeOpt.ResizeImage(img2)
+	res := part.WithBeginPoint(util.CenterPoint(img1)).Compare(img1, img2)
 	t.Log(res)
 }
