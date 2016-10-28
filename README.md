@@ -6,13 +6,13 @@ Image Compare Toolkit
 
 ### Hash Compare
 
-[x] Average  
-[x] Difference
+- [x] Average  
+- [x] Difference  
 
 ### Pixel Compare
 
-[x] Part
-[x] Block
+- [x] Part  
+- [x] Block  
 
 ## Usage
 
@@ -21,15 +21,15 @@ Image Compare Toolkit
 ```go
 import (
 	"github.com/gotokatsuya/ipare"
-	ipareutil "github.com/gotokatsuya/ipare/util"
+	"github.com/gotokatsuya/ipare/util"
 	"github.com/gotokatsuya/ipare/algorithm/hash"
 )
 
 hash := ipare.NewHash()
 // Default is DifferenceHash.
 // hash.Algorithm = hash.NewAverage()
-img1, _ := ipareutil.DecodeImageByPath(imgPath1)
-img2, _ := ipareutil.DecodeImageByPath(imgPath2)
+img1, _ := util.DecodeImageByPath(imgPath1)
+img2, _ := util.DecodeImageByPath(imgPath2)
 
 const threshold = 5
 if distance := hash.Compare(img1, img2); distance <= threshold {
@@ -44,15 +44,15 @@ if distance := hash.Compare(img1, img2); distance <= threshold {
 ```go
 import (
 	"github.com/gotokatsuya/ipare"
-	ipareutil "github.com/gotokatsuya/ipare/util"
+	"github.com/gotokatsuya/ipare/util"
 	"github.com/gotokatsuya/ipare/algorithm/pixel"
 )
 
 pixel := ipare.NewPixel()
 // Default is DifferenceHash.
 // pixel.Algorithm = pixel.NewBlock()
-img1, _ := ipareutil.DecodeImageByPath(imgPath1)
-img2, _ := ipareutil.DecodeImageByPath(imgPath2)
+img1, _ := util.DecodeImageByPath(imgPath1)
+img2, _ := util.DecodeImageByPath(imgPath2)
 
 const threshold = 10
 if distance := pixel.Compare(img1, img2); distance <= threshold {
