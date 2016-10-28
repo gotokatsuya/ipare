@@ -28,8 +28,8 @@ import (
 hash := ipare.NewHash()
 // Default is DifferenceHash.
 // hash.Algorithm = hash.NewAverage()
-img1, _ := util.DecodeImageByPath(imgPath1)
-img2, _ := util.DecodeImageByPath(imgPath2)
+img1, _ := util.Open(imgPath1)
+img2, _ := util.Open(imgPath2)
 
 const threshold = 5
 if distance := hash.Compare(img1, img2); distance <= threshold {
@@ -51,8 +51,8 @@ import (
 pixel := ipare.NewPixel()
 // Default is DifferenceHash.
 // pixel.Algorithm = pixel.NewBlock()
-img1, _ := util.DecodeImageByPath(imgPath1)
-img2, _ := util.DecodeImageByPath(imgPath2)
+img1, _ := util.Open(imgPath1)
+img2, _ := util.Open(imgPath2)
 
 const threshold = 10
 if distance := pixel.Compare(img1, img2); distance <= threshold {
@@ -68,4 +68,9 @@ if distance := pixel.Compare(img1, img2); distance <= threshold {
 ```bash
 $ go test github.com/gotokatsuya/ipare -v
 ```
+
+
+## Thanks
+
+[disintegration/imaging](https://github.com/disintegration/imaging)
 
