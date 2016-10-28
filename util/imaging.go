@@ -2,6 +2,7 @@ package util
 
 import (
 	"image"
+	"image/draw"
 
 	"github.com/disintegration/imaging"
 )
@@ -53,4 +54,11 @@ func GrayscaleImage(src image.Image) image.Image {
 func CenterPoint(src image.Image) (int, int) {
 	size := src.Bounds().Size()
 	return size.X / 2, size.Y / 2
+}
+
+func Copy(src image.Image) image.Image {
+	r := src.Bounds()
+	dst := image.NewNRGBA(r)
+	draw.Draw(dst, r, src, r.Min, draw.Src)
+	return dst
 }
