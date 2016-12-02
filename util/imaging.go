@@ -67,3 +67,32 @@ func Open(filename string) (image.Image, error) {
 func Decode(r io.Reader) (image.Image, error) {
 	return imaging.Decode(r)
 }
+
+func AdjustValuesForPixelPartAlgorithm(centerX, centerY, partSize int) (adjustBeginPoint, adjustPartSize int, ok bool) {
+	if partSize <= 0 {
+		return
+	}
+
+	if centerX <= 0 || centerY <= 0 {
+		return
+	}
+
+	// not square
+	if centerX != centerY {
+		return
+	}
+
+	beginPoint := centerX - partSize/2
+	if beginPoint >= 0 {
+		adjustBeginPoint = beginPoint
+		adjustPartSize = partSize
+		ok = true
+		return
+	}
+
+	adjustBeginPoint = 0
+	adjustPartSize = centerX * 2
+	ok = true
+
+	return
+}
